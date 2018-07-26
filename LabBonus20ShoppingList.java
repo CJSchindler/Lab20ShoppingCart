@@ -51,7 +51,7 @@ public class LabBonus20ShoppingList {
 		System.out.println();
 		
 		// display all items in the shopping cart using a method
-		displayShoppingCart(shoppingCart);
+		displayShoppingCart(shoppingCart, inventory);
 		System.out.println();
 		
 		//display the average price of items in the shopping cart
@@ -73,15 +73,21 @@ public class LabBonus20ShoppingList {
 
 
 
-	private static void displayShoppingCart(ArrayList<String> shoppingCart) {
+	private static void displayShoppingCart(ArrayList<String> shoppingCart, HashMap<String, Double> inventory) {
 			System.out.println("Item");
 			System.out.println("===========");
 			
+			double sum = 0;//the total price, added together
+			double price = 0.0;
+			int count = 0; //the number of individual items
+			
 			for (String orderedItem : shoppingCart) {
-				System.out.println(orderedItem);
+				sum += inventory.get(orderedItem);
+				price = inventory.get(orderedItem);
+				count++;
+				System.out.println(orderedItem + "\t\t$" + price);
 			}
 		}
-		
 
 	private static void average(ArrayList<String> shoppingCart, HashMap<String, Double> inventory) {
 		double sum = 0;//the total price of all items
@@ -92,6 +98,8 @@ public class LabBonus20ShoppingList {
 			sum += inventory.get(orderedItem);
 			count++;
 		}
+		System.out.println("Your total is $" + sum);
+		System.out.println();
 		System.out.println("The average price of items in your cart is: $" + sum/count);
 		
 	}
